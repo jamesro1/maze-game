@@ -2,67 +2,33 @@
 using System.Collections;
 
 public class AI : MonoBehaviour {                //  Attached to 'BadGuy1' - Enemy
-	public Transform target;
-	public float speed = 15f;                    // The moving speed of Enemy is 4f
-	public GameObject player;
+
+	public float speed = 15f;                    // The moving speed of Enemy is 15f
+	public GameObject player;					 // Enemies target
 	public float spawnTime = 3f;                 //  New bullet created every 3f
-	public int minrange = 10;
-	public GameObject enemy;
-	public bool chase = false;
-	public int shotCount;
-	public int total = 1;
-	public GameObject bullet;
+	public GameObject bullet;					// Bullet prefeab
+	public GameObject detect;					//Enemies Detect radius object
 
-	// Use this for initialization
 	void Start () {
-
-			target = player.transform;
+		InvokeRepeating ("enemyShoot", 2f, spawnTime); //Repeating shooting
 	}
-	                                                            // Update is called once per fram
+
 	void Update() {
-
-			distanceCheck ();
-		if (chase == true)
+		if (detect.GetComponent<Detect>().isInRange && player != null) // See if "Detect" found player and if player is still alive
 		    {
-			enemy.transform.LookAt (target);
-			transform.position += transform.forward * speed * Time.deltaTime;
-			enemyShoot ();
+			transform.LookAt (player.transform);								// Look at the player
+			transform.position += transform.forward * speed * Time.deltaTime;	// Move forward
 		}
 	}
 
-	void distanceCheck()
-	{
-		if (Vector3.Distance (transform.position, target.position) <= minrange) 
-		{
-			chase = true;
-		} 
-		else 
-		{
-			chase = false;
-		}
-
-
-	}
-
-	                                                                                                   //  Coroutine 
 	void enemyShoot()
 	{
-		shotCount++;
-		if (shotCount <= total)
-			StartCoroutine (waitToShoot ());
 
+		if (detect.GetComponent<Detect> ().isInRange && player != null) 							//See if "Detect" found the player 
+		{
+			GameObject clone;																		//Make clone variable
+			clone = (Instantiate (bullet, transform.position, transform.rotation)) as GameObject;	//Instantiate bullet		
+			Physics.IgnoreCollision (clone.GetComponent<Collider> (), GetComponent<Collider> ());	//Ingore enemy's collider
 		}
-                                                                                                        //  Enemy shooting
-	IEnumerator waitToShoot ()
-	{
-		Debug.Log ("waitToShoot");
-		GameObject clone;
-		clone = (Instantiate (bullet, transform.position, transform.rotation)) as GameObject;
-		clone.GetComponent <Rigidbody> ().AddForce (transform.forward * 1000);
-		enemyShoot ();
-		yield return new WaitForSeconds (3);
-		shotCount = 0;
 	}
-
-
 }
