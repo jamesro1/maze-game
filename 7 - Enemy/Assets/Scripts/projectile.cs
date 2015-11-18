@@ -22,8 +22,11 @@ public class projectile : MonoBehaviour {
 	                                                                            // Players projectile destroys the Enemy
 	void OnCollisionEnter(Collision other) 
 	{
-	if (other.transform.tag == "Enemy")
-	    Destroy (other.gameObject);
+	if (other.transform.tag == "Enemy") 
+		{
+			GameObject.Find ("Canvas").transform.FindChild("Buttons").gameObject.SetActive(true);
+			Destroy (other.gameObject);
+		}
 	Destroy (this.gameObject);
 
 	}
