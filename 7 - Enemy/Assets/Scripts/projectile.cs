@@ -24,7 +24,7 @@ public class projectile : MonoBehaviour {
 	{
 	if (other.transform.tag == "Enemy") 
 		{
-			GameObject.Find ("Canvas").transform.FindChild("Buttons").gameObject.SetActive(true);
+			// GameObject.Find ("Canvas").transform.FindChild("Buttons").gameObject.SetActive(true);
 			Destroy (other.gameObject);
 		}
 	Destroy (this.gameObject);

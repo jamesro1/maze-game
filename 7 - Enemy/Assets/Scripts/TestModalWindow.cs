@@ -34,15 +34,15 @@ public class TestModalWindow : MonoBehaviour {
 	void TestYesFunction ()
 
 	{
-		displayManager.DisplayMessage ("Heck feah! Yup!");
+		displayManager.DisplayMessage ("The Yes Button");
 	}
 	void TestNoFunction ()
 	{
-		displayManager.DisplayMessage ("No way, Jose!");
+		displayManager.DisplayMessage ("The No Button");
 	}
 	void TestCancelFunction ()
 	{
-		displayManager.DisplayMessage ("I give up!");
+		displayManager.DisplayMessage ("The Cancel Button!");
 	}
 
 	

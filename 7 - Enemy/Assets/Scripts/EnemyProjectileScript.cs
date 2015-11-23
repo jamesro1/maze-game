@@ -27,7 +27,7 @@ public class EnemyProjectileScript : MonoBehaviour {         //  Attached to 'Ba
 	void OnCollisionEnter(Collision other) {            //  Detect if colliding if anything )                 
 		if (other.transform.tag == "Player") 
 				{
-						GameObject.Find ("Canvas").transform.FindChild("Buttons").gameObject.SetActive(true);
+						// GameObject.Find ("Canvas").transform.FindChild("Buttons").gameObject.SetActive(true);
 						Destroy (other.gameObject);     //  The object will be destroyed now
 				}
 		Destroy (gameObject);							// Destroys when it hits anything
