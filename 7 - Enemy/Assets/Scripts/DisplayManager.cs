@@ -4,8 +4,7 @@ using System.Collections;
 
 public class DisplayManager : MonoBehaviour {
 	
-	public Text displayText;
-	public float displayTime;
+	public Image displayText;
 	public float fadeTime;
 	
 	private IEnumerator fadeAlpha;
@@ -18,16 +17,10 @@ public class DisplayManager : MonoBehaviour {
 			if (!displayManager)
 				Debug.LogError ("There needs to be one active DisplayManager script on a GameObject in your scene.");
 		}
-		
 		return displayManager;
 	}
 	
-	public void DisplayMessage (string message) {
-		displayText.text = message;
-		SetAlpha ();
-	}
-	
-	void SetAlpha () {
+	public void SetAlpha () {
 		if (fadeAlpha != null) {
 			StopCoroutine (fadeAlpha);
 		}
@@ -37,17 +30,16 @@ public class DisplayManager : MonoBehaviour {
 	
 	IEnumerator FadeAlpha () {
 		Color resetColor = displayText.color;
-		resetColor.a = 1;
+		resetColor.a = 0;
 		displayText.color = resetColor;
 		
-		yield return new WaitForSeconds (displayTime);
-		
-		while (displayText.color.a > 0) {
+		while (displayText.color.a < .75f) {
 			Color displayColor = displayText.color;
-			displayColor.a -= Time.deltaTime / fadeTime;
+			displayColor.a += Time.deltaTime / fadeTime;
 			displayText.color = displayColor;
 			yield return null;
 		}
 		yield return null;
+
 	}
 }

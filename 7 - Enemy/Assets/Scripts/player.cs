@@ -6,7 +6,7 @@ public class player : MonoBehaviour                   //  Attached to 'GoodGuy1'
 	public Vector3 startPosition;
 	public float speed = 20f;
 	public float gravity = 20.0f;
-	private Vector3 moveDirection = Vector3.zero;
+	//private Vector3 moveDirection = Vector3.zero;
 	public GameObject projectile;                                                              //  projectile is referenced from the 'projectile' script
 
 	void Start () {
@@ -39,6 +39,7 @@ public class player : MonoBehaviour                   //  Attached to 'GoodGuy1'
 		if (Input.GetKeyDown (KeyCode.Space)) {                                                  //  Spacebar shoots player projectiles
 			GameObject clone;
 			clone = Instantiate (projectile, transform.position, transform.rotation) as GameObject;
+			clone.GetComponent<projectile>().target = null;
 			Physics.IgnoreCollision(clone.GetComponent<Collider>(), GetComponent<Collider>());
 		}
 	

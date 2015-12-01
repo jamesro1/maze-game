@@ -10,7 +10,7 @@ public class TestModalWindow : MonoBehaviour {
 
 	private UnityAction myYesAction;
 	private UnityAction myNoAction;
-	private UnityAction myCancelAction;
+
 
 	void Awake ()
 	{
@@ -19,31 +19,28 @@ public class TestModalWindow : MonoBehaviour {
 
 		myYesAction = new UnityAction (TestYesFunction);
 		myNoAction = new UnityAction (TestNoFunction);
-		myCancelAction = new UnityAction (TestCancelFunction);
+
 	}
 
 //  Send to the Modal Panel to set up the Buttons and Functions to call
 
 	public void TestYNC ()
 	{
-		modalPanel.Choice ("Would you like a poke in the eye?/nHow about with a sharp stick?", myYesAction, myNoAction, myCancelAction);
+		modalPanel.Choice ("Want to play Again?", myYesAction, myNoAction);
+		displayManager.SetAlpha ();
 	}
 		                                   
 //  These are wrapped into UnityActions
 
 	void TestYesFunction ()
-
 	{
-		displayManager.DisplayMessage ("The Yes Button");
+		Application.LoadLevel (1);
 	}
 	void TestNoFunction ()
 	{
-		displayManager.DisplayMessage ("The No Button");
+		Application.LoadLevel (0);
 	}
-	void TestCancelFunction ()
-	{
-		displayManager.DisplayMessage ("The Cancel Button!");
-	}
+
 
 	
 	

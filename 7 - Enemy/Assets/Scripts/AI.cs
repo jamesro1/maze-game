@@ -23,11 +23,11 @@ public class AI : MonoBehaviour {                //  Attached to 'BadGuy1' - Ene
 
 	void enemyShoot()
 	{
-
 		if (detect.GetComponent<Detect> ().isInRange && player != null) 							//See if "Detect" found the player 
 		{
 			GameObject clone;																		//Make clone variable
-			clone = (Instantiate (bullet, transform.position, transform.rotation)) as GameObject;	//Instantiate bullet		
+			clone = (Instantiate (bullet, transform.position, transform.rotation)) as GameObject;	//Instantiate bullet
+			clone.GetComponent<projectile>().target = player;
 			Physics.IgnoreCollision (clone.GetComponent<Collider> (), GetComponent<Collider> ());	//Ingore enemy's collider
 		}
 	}
